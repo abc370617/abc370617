@@ -5,6 +5,7 @@ import com.abc.vo.PropertiesBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  *  date    :  2018/3/30 15:42
  * */
 
-@RestController
+@Controller
 @RequestMapping("planNote")
 
 //@PropertySource("classpath:application.properties")
@@ -38,12 +39,10 @@ public class PlanNoteController {
         logger.info("【获取笔记版本和开发者信息】");
         return planNote;
     }
-    @RequestMapping(value = "404", method = {RequestMethod.GET,RequestMethod.POST}, produces = "application/json;charset=utf-8")
-    public String into404(){
-        PlanNote planNote=new PlanNote();
-       // planNote.setVersion(area);
-        planNote.setOwner(propertiesBean.getOwner());
-        logger.info("【获取笔记版本和开发者信息】");
-        return "404";
+    @RequestMapping("index")
+    public String toIndex(){
+        System.out.println("into index");
+        return "index";
     }
+
 }

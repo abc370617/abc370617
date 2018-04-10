@@ -12,17 +12,19 @@ import org.springframework.web.servlet.view.JstlView;
  *  date    :  2018/4/9 14:55
  * */
 @Configuration
-public class webInterceptorAdapter implements WebMvcConfigurer {
+@EnableWebMvc
+public class WebInterceptorAdapter implements WebMvcConfigurer {
     @Bean
     public  WebIntercrptor webIntercrptor(){
         return new WebIntercrptor();
     }
+    //todo 访问不到jsp 报404
     //注入视图处理器bean
     @Bean
     public InternalResourceViewResolver viewResolver(){
         InternalResourceViewResolver resourceViewResolver=new InternalResourceViewResolver();
-        resourceViewResolver.setPrefix("/templates/");
-        resourceViewResolver.setSuffix(".html");
+        resourceViewResolver.setPrefix("/WEB-INF/classes/templates/");//和实际目录是有区别的，因为运行时会编译到此目录
+        resourceViewResolver.setSuffix(".jsp");
         resourceViewResolver.setViewClass(JstlView.class);
         return resourceViewResolver;
     }
