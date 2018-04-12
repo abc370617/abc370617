@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,12 @@ public class PlanNoteController {
     public String toIndex(){
         System.out.println("into index");
         return "index";
+    }
+
+    @RequestMapping("/advice")  //msg 取值是AdviceController里addAttributes方法里设定的
+    public String getSomething(@ModelAttribute("msg")String msg,DemoObj obj){
+        System.out.println("id:"+obj.getId()+" , name:"+obj.getName());
+        throw new  IllegalArgumentException("非常抱歉参数有误 "+msg);
     }
 
 }

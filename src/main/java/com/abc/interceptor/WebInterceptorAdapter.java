@@ -33,9 +33,10 @@ public class WebInterceptorAdapter implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/error").setViewName("404.html");
+        registry.addViewController("/index").setViewName("index.html");
     }
 
-    @Override
+    @Override    //添加拦截器
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(webIntercrptor()).addPathPatterns("/**");
     }
@@ -45,5 +46,10 @@ public class WebInterceptorAdapter implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/view").addResourceLocations("/");
+    }
+    //参数路径带点不被忽略
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        configurer.setUseRegisteredSuffixPatternMatch(false);
     }
 }
