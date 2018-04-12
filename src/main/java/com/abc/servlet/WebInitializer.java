@@ -23,5 +23,6 @@ public class WebInitializer implements WebApplicationInitializer { //提供servl
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(context));//注册DispatcherServlet
         servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
+        servlet.setAsyncSupported(true);//开启异步方法支持，适用于服务器推送技术
     }
 }
